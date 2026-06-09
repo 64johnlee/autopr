@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 580" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#58a6ff"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#3fb950"/>
+    </marker>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="580" fill="#0d1117"/>
+
+  <!-- Title -->
+  <text x="450" y="38" text-anchor="middle" fill="#e6edf3" font-size="20" font-weight="700">AutoPR — Architecture</text>
+  <text x="450" y="58" text-anchor="middle" fill="#8b949e" font-size="12">Autonomous Bounty Agent · Qwen × Alibaba Cloud</text>
+
+  <!-- ── Alibaba Cloud box ── -->
+  <rect x="540" y="80" width="330" height="200" rx="10" fill="#1a1f2e" stroke="#ff6a00" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="705" y="102" text-anchor="middle" fill="#ff6a00" font-size="11" font-weight="600">ALIBABA CLOUD MODEL STUDIO</text>
+
+  <!-- Qwen-Max box -->
+  <rect x="560" y="115" width="130" height="60" rx="8" fill="#2a1a0d" stroke="#d29922" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="625" y="140" text-anchor="middle" fill="#d29922" font-size="13" font-weight="700">Qwen-Max</text>
+  <text x="625" y="158" text-anchor="middle" fill="#8b949e" font-size="10">Triage · Reasoning</text>
+
+  <!-- Qwen-Plus box -->
+  <rect x="720" y="115" width="130" height="60" rx="8" fill="#1a1a2a" stroke="#58a6ff" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="785" y="140" text-anchor="middle" fill="#58a6ff" font-size="13" font-weight="700">Qwen-Plus</text>
+  <text x="785" y="158" text-anchor="middle" fill="#8b949e" font-size="10">Coder · Tool Loop</text>
+
+  <!-- dashscope endpoint label -->
+  <text x="705" y="210" text-anchor="middle" fill="#484f58" font-size="10">dashscope.aliyuncs.com/compatible-mode/v1</text>
+  <text x="705" y="226" text-anchor="middle" fill="#484f58" font-size="10">OpenAI-compatible · pay-per-token</text>
+  <text x="705" y="268" text-anchor="middle" fill="#484f58" font-size="10">ECS t6-small · Docker · $8/month</text>
+
+  <!-- ── Agent Core (left column) ── -->
+  <!-- Scanner -->
+  <rect x="30" y="80" width="160" height="60" rx="8" fill="#161b22" stroke="#3fb950" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="110" y="106" text-anchor="middle" fill="#3fb950" font-size="13" font-weight="700">🔍 Scanner</text>
+  <text x="110" y="122" text-anchor="middle" fill="#8b949e" font-size="10">Opire · Algora · GitHub</text>
+  <text x="110" y="134" text-anchor="middle" fill="#8b949e" font-size="10">Score by $/competition</text>
+
+  <!-- Triage -->
+  <rect x="30" y="175" width="160" height="60" rx="8" fill="#161b22" stroke="#d29922" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="110" y="201" text-anchor="middle" fill="#d29922" font-size="13" font-weight="700">⚖️  Triage</text>
+  <text x="110" y="217" text-anchor="middle" fill="#8b949e" font-size="10">score · approach · skip</text>
+  <text x="110" y="229" text-anchor="middle" fill="#8b949e" font-size="10">JSON structured output</text>
+
+  <!-- Coder -->
+  <rect x="30" y="270" width="160" height="80" rx="8" fill="#161b22" stroke="#58a6ff" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="110" y="296" text-anchor="middle" fill="#58a6ff" font-size="13" font-weight="700">💻 Coder</text>
+  <text x="110" y="312" text-anchor="middle" fill="#8b949e" font-size="10">list_files · read_file</text>
+  <text x="110" y="326" text-anchor="middle" fill="#8b949e" font-size="10">search_code · write_file</text>
+  <text x="110" y="340" text-anchor="middle" fill="#8b949e" font-size="10">run_command · finish()</text>
+
+  <!-- PR Submitter -->
+  <rect x="30" y="385" width="160" height="60" rx="8" fill="#161b22" stroke="#bc8cff" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="110" y="411" text-anchor="middle" fill="#bc8cff" font-size="13" font-weight="700">📤 PR Submitter</text>
+  <text x="110" y="427" text-anchor="middle" fill="#8b949e" font-size="10">fork · branch · push · PR</text>
+  <text x="110" y="439" text-anchor="middle" fill="#8b949e" font-size="10">gh CLI · GitHub API</text>
+
+  <!-- Memory -->
+  <rect x="30" y="480" width="160" height="60" rx="8" fill="#161b22" stroke="#f85149" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="110" y="506" text-anchor="middle" fill="#f85149" font-size="13" font-weight="700">🧠 Memory</text>
+  <text x="110" y="522" text-anchor="middle" fill="#8b949e" font-size="10">SQLite · merge rate</text>
+  <text x="110" y="534" text-anchor="middle" fill="#8b949e" font-size="10">per-repo learning</text>
+
+  <!-- ── Middle column: Tool sandbox + Dashboard ── -->
+  <!-- Repo Sandbox -->
+  <rect x="240" y="270" width="250" height="100" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="365" y="296" text-anchor="middle" fill="#e6edf3" font-size="12" font-weight="600">Repo Sandbox</text>
+  <text x="365" y="315" text-anchor="middle" fill="#8b949e" font-size="10">gh repo clone --depth=1</text>
+  <text x="365" y="330" text-anchor="middle" fill="#8b949e" font-size="10">tempfile · subprocess</text>
+  <text x="365" y="345" text-anchor="middle" fill="#8b949e" font-size="10">git diff · commit · push</text>
+  <text x="365" y="360" text-anchor="middle" fill="#484f58" font-size="9">cleaned up after PR</text>
+
+  <!-- Dashboard -->
+  <rect x="240" y="410" width="250" height="100" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="365" y="436" text-anchor="middle" fill="#e6edf3" font-size="12" font-weight="600">Live Dashboard</text>
+  <text x="365" y="455" text-anchor="middle" fill="#8b949e" font-size="10">FastAPI · SSE stream</text>
+  <text x="365" y="470" text-anchor="middle" fill="#8b949e" font-size="10">stats · activity feed · PR list</text>
+  <text x="365" y="485" text-anchor="middle" fill="#8b949e" font-size="10">http://localhost:7860</text>
+  <text x="365" y="500" text-anchor="middle" fill="#484f58" font-size="9">Alibaba Cloud ECS · port 7860</text>
+
+  <!-- ── Arrows ── -->
+  <!-- Scanner → Triage -->
+  <line x1="110" y1="140" x2="110" y2="174" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- Triage → Coder -->
+  <line x1="110" y1="235" x2="110" y2="269" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- Coder → PR Submitter -->
+  <line x1="110" y1="350" x2="110" y2="384" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- PR Submitter → Memory -->
+  <line x1="110" y1="445" x2="110" y2="479" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <!-- Memory → Scanner (loop) -->
+  <path d="M 30 510 Q 5 510 5 110 Q 5 80 29 80" fill="none" stroke="#f85149" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+  <text x="14" y="300" fill="#f85149" font-size="9" transform="rotate(-90,14,300)">learn loop</text>
+
+  <!-- Triage ↔ Qwen-Max -->
+  <path d="M 191 205 Q 350 205 559 155" fill="none" stroke="#d29922" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="375" y="193" fill="#d29922" font-size="9" text-anchor="middle">score + approach</text>
+
+  <!-- Coder ↔ Qwen-Plus -->
+  <path d="M 191 310 Q 490 310 719 155" fill="none" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="490" y="295" fill="#58a6ff" font-size="9" text-anchor="middle">tool calls</text>
+
+  <!-- Coder ↔ Sandbox -->
+  <line x1="191" y1="310" x2="239" y2="310" stroke="#30363d" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- PR Submitter → GitHub -->
+  <rect x="540" y="310" width="130" height="50" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+  <text x="605" y="332" text-anchor="middle" fill="#e6edf3" font-size="12" font-weight="600">GitHub</text>
+  <text x="605" y="348" text-anchor="middle" fill="#8b949e" font-size="10">fork · PR · close ref</text>
+  <line x1="191" y1="415" x2="539" y2="340" stroke="#bc8cff" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Dashboard SSE -->
+  <rect x="540" y="410" width="130" height="50" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1.5"/>
+  <text x="605" y="432" text-anchor="middle" fill="#e6edf3" font-size="12" font-weight="600">Browser</text>
+  <text x="605" y="448" text-anchor="middle" fill="#8b949e" font-size="10">SSE · live feed</text>
+  <line x1="491" y1="460" x2="539" y2="460" stroke="#30363d" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Agent loop label -->
+  <text x="450" y="560" text-anchor="middle" fill="#484f58" font-size="11">15-minute autonomous loop · no human input required</text>
+</svg>
