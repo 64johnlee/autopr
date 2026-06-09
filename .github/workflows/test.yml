@@ -6,8 +6,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with: { python-version: "3.11" }
+        with:
+          python-version: "3.11"
       - run: pip install -e ".[dev]"
       - run: python -c "from autopr.models import BountyIssue; from autopr.memory import init_db; init_db(); print('OK')"
-      - run: python -c "from autopr.scanner import scan_all, BLOCKED_ORGS; print(f'Blocklist: {len(BLOCKED_ORGS)} orgs')"
+      - run: python -c "from autopr.scanner import scan_all, BLOCKED_ORGS; print('Blocklist:', len(BLOCKED_ORGS), 'orgs')"
       - run: python -c "from autopr.prompts import TRIAGE_SYSTEM, CODER_SYSTEM; assert len(TRIAGE_SYSTEM) > 50"
