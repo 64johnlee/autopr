@@ -23,6 +23,7 @@ BLOCKED_REPOS: set[str] = {
     "orchestration-agent/AgentOrchestration",
 }
 BLOCKED_ORGS: set[str] = {
+    "Scottcjn", "digitaldesignerjazz", "INDIGOAZUL", "relayhop", "xevrion-v2",
     "bolivian-peru", "SolFoundry", "SecureBananaLabs",
     "UnsafeLabs", "kcolbchain", "claude-builders-bounty", "Expensify",
 }
