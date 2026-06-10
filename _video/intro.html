@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>AutoPR</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,monospace;
+       background:#0d1117;color:#e6edf3;height:100vh;display:flex;
+       align-items:center;justify-content:center;overflow:hidden}
+  .wrap{text-align:center;animation:rise 1.2s ease-out}
+  h1{font-size:4.5rem;font-weight:800;color:#58a6ff;letter-spacing:-.02em}
+  h1 .badge{display:inline-block;background:#238636;color:#fff;border-radius:14px;
+            padding:.15rem 1rem;font-size:1.1rem;font-weight:700;vertical-align:middle;
+            margin-left:.8rem;animation:pulse 2s infinite}
+  p.tag{margin-top:1.2rem;font-size:1.45rem;color:#e6edf3;font-weight:500}
+  p.sub{margin-top:1.6rem;font-size:1.05rem;color:#8b949e}
+  p.sub b{color:#d29922}
+  .loop{margin-top:2.2rem;font-family:monospace;font-size:1.05rem;color:#8b949e}
+  .loop span{color:#58a6ff}
+  @keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.45}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>AutoPR <span class="badge">LIVE</span></h1>
+  <p class="tag">An autonomous agent that finds bounties, writes the fix,<br/>and submits the PR — without human input.</p>
+  <div class="loop"><span>scan</span> → <span>triage</span> → <span>code</span> → <span>submit PR</span> → <span>learn</span></div>
+  <p class="sub">Powered by <b>Qwen-Max + Qwen-Plus</b> · Alibaba Cloud Model Studio · ECS</p>
+</div>
+</body>
+</html>

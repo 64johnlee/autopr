@@ -1,0 +1,6 @@
+﻿__pycache__/
+*.pyc
+_video/out/
+_video/devpost_*.py
+_video/yt_*.py
+.env
