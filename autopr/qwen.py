@@ -11,9 +11,12 @@ from openai import AsyncOpenAI
 
 logger = logging.getLogger(__name__)
 
-_TRIAGE_MODEL = "qwen-max"
-_CODER_MODEL  = "qwen-plus"
-_BASE_URL     = "https://dashscope.aliyuncs.com/compatible-mode/v1"
+_TRIAGE_MODEL = os.environ.get("QWEN_TRIAGE_MODEL", "qwen-max")
+_CODER_MODEL  = os.environ.get("QWEN_CODER_MODEL", "qwen-plus")
+# Region must match the API key's region. Beijing (default) vs Singapore intl:
+#   https://dashscope-intl.aliyuncs.com/compatible-mode/v1
+_BASE_URL     = os.environ.get("DASHSCOPE_BASE_URL",
+                               "https://dashscope.aliyuncs.com/compatible-mode/v1")
 _MAX_RETRIES  = 6
 
 

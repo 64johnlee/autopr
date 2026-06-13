@@ -24,12 +24,17 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest>=7.0", "pytest-asyncio>=0.23"]
+mcp = ["mcp>=1.2.0"]
+slack = ["mcp>=1.2.0", "slack_bolt>=1.18", "aiohttp>=3.9"]
 
 [project.scripts]
 autopr = "autopr.cli:main"
+autopr-mcp = "autopr.mcp_server:main"
+autopr-slack = "slack_app.app:main"
+autopr-api = "autopr.api_server:main"
 
 [tool.hatch.build.targets.wheel]
-packages = ["autopr"]
+packages = ["autopr", "slack_app"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"

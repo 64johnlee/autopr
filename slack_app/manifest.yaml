@@ -1,0 +1,30 @@
+# AutoPR Slack app manifest — paste into "Create New App → From a manifest".
+# Socket Mode means no public URL is needed (ideal for the dev sandbox).
+display_information:
+  name: AutoPR
+  description: Autonomous agent that fixes GitHub issues and opens PRs, right from Slack.
+  background_color: "#0d1117"
+features:
+  bot_user:
+    display_name: AutoPR
+    always_online: true
+  app_home:
+    home_tab_enabled: false
+    messages_tab_enabled: true
+    messages_tab_read_only_enabled: false
+oauth_config:
+  scopes:
+    bot:
+      - app_mentions:read   # receive @AutoPR mentions
+      - chat:write          # post diffs, buttons, PR links
+      - channels:history    # read thread context
+      - groups:history
+      - im:history
+settings:
+  event_subscriptions:
+    bot_events:
+      - app_mention
+  interactivity:
+    is_enabled: true        # Open PR / Discard buttons
+  socket_mode_enabled: true
+  org_deploy_enabled: false
