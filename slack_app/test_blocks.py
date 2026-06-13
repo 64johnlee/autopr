@@ -51,3 +51,12 @@ def test_error_blocks_truncate_to_500():
 def test_usage_blocks_is_a_section():
     out = blocks.usage_blocks()
     assert out and out[0]["type"] == "section"
+
+
+def test_short_diff_is_not_truncated():
+    assert "truncated" not in str(blocks.preview_blocks(_sample(diff="short diff")))
+
+
+def test_working_and_discarded_blocks():
+    assert blocks.working_blocks("o/r", "do a thing")[0]["type"] == "section"
+    assert blocks.discarded_blocks()[0]["type"] == "section"

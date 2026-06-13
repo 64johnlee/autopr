@@ -20,6 +20,21 @@ from mcp.client.stdio import stdio_client
 logger = logging.getLogger("autopr.slack.mcp")
 
 
+def _parse_tool_result(res: Any) -> dict[str, Any]:
+    """Normalize an MCP CallToolResult into a plain dict: structuredContent first
+    (our tools return dicts), then JSON text content, else an error dict."""
+    if getattr(res, "structuredContent", None) is not None:
+        return res.structuredContent
+    for c in getattr(res, "content", None) or []:
+        text = getattr(c, "text", None)
+        if text:
+            try:
+                return json.loads(text)
+            except json.JSONDecodeError:
+                return {"success": False, "error": text}
+    return {"success": False, "error": "empty MCP response"}
+
+
 class AutoPRMCP:
     """A long-lived connection to the AutoPR MCP server."""
 
@@ -48,17 +63,7 @@ class AutoPRMCP:
             raise RuntimeError("AutoPRMCP.start() not called")
         async with self._lock:
             res = await self._session.call_tool(name, arguments)
-        # Our tools return dicts → FastMCP surfaces them as structuredContent.
-        if res.structuredContent is not None:
-            return res.structuredContent
-        for c in res.content:
-            text = getattr(c, "text", None)
-            if text:
-                try:
-                    return json.loads(text)
-                except json.JSONDecodeError:
-                    return {"success": False, "error": text}
-        return {"success": False, "error": "empty MCP response"}
+        return _parse_tool_result(res)
 
     async def stop(self) -> None:
         if self._stack is not None:

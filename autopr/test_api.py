@@ -45,3 +45,25 @@ def test_bearer_auth_enforced_when_token_set(monkeypatch):
 def test_no_auth_required_when_token_unset(monkeypatch):
     monkeypatch.delenv("AUTOPR_API_TOKEN", raising=False)
     assert client.post("/discard", json={"session_id": "x"}).status_code == 200
+
+
+def test_code_fix_success_path(monkeypatch):
+    import autopr.api_server as api
+
+    async def fake(repo, task, issue_number=0):
+        return {"success": True, "session_id": "s1", "diff": "--- a\n+++ b"}
+
+    monkeypatch.setattr(api, "run_code_fix", fake)
+    r = client.post("/code_fix", json={"repo": "o/r", "task": "t", "issue_number": 1})
+    assert r.status_code == 200
+    assert r.json()["session_id"] == "s1"
+
+
+def test_open_pr_success_path(monkeypatch):
+    import autopr.api_server as api
+
+    monkeypatch.setattr(api, "run_open_pr",
+                        lambda sid: {"success": True, "pr_url": "http://x/pr/3", "pr_number": 3})
+    r = client.post("/open_pr", json={"session_id": "s1"})
+    assert r.status_code == 200
+    assert r.json()["pr_url"] == "http://x/pr/3"

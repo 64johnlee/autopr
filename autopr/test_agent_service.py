@@ -85,3 +85,49 @@ def test_run_code_fix_success_path(monkeypatch, tmp_path):
     assert out["commit_message"] == "fix: x"
     assert "agent did work" in out["trace"]
     svc._SESSIONS.clear()
+
+
+def test_run_discard_cleans_up_work_dir(tmp_path):
+    import autopr.agent_service as svc
+
+    d = tmp_path / "wd"
+    d.mkdir()
+    (d / "f.txt").write_text("x")
+    svc._SESSIONS["sid"] = (svc._synthetic_issue("o/r", "t", 0),
+                            CoderResult(success=True, branch=f"b::{d}"))
+    out = svc.run_discard("sid")
+    assert out["success"] is True
+    assert not d.exists()           # working dir removed
+    assert "sid" not in svc._SESSIONS
+
+
+def test_run_open_pr_success_path(monkeypatch):
+    import autopr.agent_service as svc
+    from autopr.models import PRResult
+
+    svc._SESSIONS["sid2"] = (svc._synthetic_issue("o/r", "t", 0),
+                             CoderResult(success=True, branch="b::x"))
+    monkeypatch.setattr(svc, "submit",
+                        lambda issue, result: PRResult(success=True, pr_url="http://x/pr/9", pr_number=9))
+    out = svc.run_open_pr("sid2")
+    assert out["success"] is True
+    assert out["pr_url"] == "http://x/pr/9"
+    assert "sid2" not in svc._SESSIONS   # session consumed
+
+
+def test_run_code_fix_success_without_work_dir(monkeypatch):
+    import asyncio
+
+    import autopr.agent_service as svc
+
+    svc._SESSIONS.clear()
+    fake = CoderResult(success=True, changed_files=["a"], commit_message="m", branch="nodir")
+
+    async def ff(issue, on_event=None):
+        return fake
+
+    monkeypatch.setattr(svc, "fix_issue", ff)
+    out = asyncio.run(svc.run_code_fix("o/r", "t", 0))
+    assert out["success"] is True
+    assert out["diff"] == "(diff unavailable)"
+    svc._SESSIONS.clear()

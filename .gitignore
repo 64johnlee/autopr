@@ -8,6 +8,7 @@ _video/yt_*.py
 # build / tooling caches
 .ruff_cache/
 .pytest_cache/
+.coverage
 *.egg-info/
 build/
 dist/
