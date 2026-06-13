@@ -4,3 +4,10 @@ _video/out/
 _video/devpost_*.py
 _video/yt_*.py
 .env
+
+# build / tooling caches
+.ruff_cache/
+.pytest_cache/
+*.egg-info/
+build/
+dist/

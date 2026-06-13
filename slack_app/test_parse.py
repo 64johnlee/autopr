@@ -40,6 +40,29 @@ def test_empty_task_gets_default():
     assert req.task == "Fix issue #5"
 
 
+def test_plain_repo_url_without_issue():
+    req = parse_request("<@U1> https://github.com/octocat/Hello-World please fix the readme")
+    assert req is not None
+    assert req.repo == "octocat/Hello-World"
+    assert req.issue_number == 0
+    assert "readme" in req.task  # URL residue scrubbed; "please fix" filler stripped
+
+
+def test_repo_url_with_extra_path():
+    req = parse_request("fix github.com/octocat/Hello-World/tree/main typo")
+    assert req is not None
+    assert req.repo == "octocat/Hello-World"
+
+
+def test_slack_autolinked_url_residue_is_scrubbed():
+    req = parse_request("<@U1> <https://github.com/octocat/Hello-World> fix the bug")
+    assert req is not None
+    assert req.repo == "octocat/Hello-World"
+    assert all(c not in req.task for c in "<>|")
+    assert "github.com" not in req.task and "https" not in req.task
+    assert "bug" in req.task
+
+
 def test_no_repo_returns_none():
     assert parse_request("<@U1> hello what can you do?") is None
 

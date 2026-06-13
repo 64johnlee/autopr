@@ -27,7 +27,8 @@ logger = logging.getLogger("autopr.service")
 # In-process registry; fine for a single-worker server.
 _SESSIONS: dict[str, tuple[BountyIssue, CoderResult]] = {}
 
-_MAX_TRACE = 40  # cap the agent trace returned to callers
+_MAX_TRACE = 40      # cap the agent trace returned to callers
+_MAX_SESSIONS = 50   # bound the registry so un-consumed previews don't leak temp dirs
 
 
 def _synthetic_issue(repo: str, task: str, issue_number: int) -> BountyIssue:
@@ -62,6 +63,21 @@ def _compute_diff(work_dir: Path) -> str:
     return (r.stdout or "")[:20000]
 
 
+def _remember(session_id: str, issue: BountyIssue, result: CoderResult) -> None:
+    """Store a session, evicting (and cleaning up) the oldest when the cap is hit.
+
+    Prevents un-consumed previews from leaking temp clone dirs on a long-running
+    server (the REST API may be called many times before any open_pr/discard).
+    """
+    while len(_SESSIONS) >= _MAX_SESSIONS:
+        old_id = next(iter(_SESSIONS))
+        _, old = _SESSIONS.pop(old_id)
+        old_dir = _unpack_work_dir(old)
+        if old_dir is not None:
+            shutil.rmtree(old_dir, ignore_errors=True)
+    _SESSIONS[session_id] = (issue, result)
+
+
 async def run_code_fix(repo: str, task: str, issue_number: int = 0) -> dict[str, Any]:
     """Clone, run the coding agent, commit locally, and return a diff to preview.
 
@@ -86,7 +102,7 @@ async def run_code_fix(repo: str, task: str, issue_number: int = 0) -> dict[str,
     diff = _compute_diff(work_dir) if work_dir else "(diff unavailable)"
 
     session_id = uuid.uuid4().hex[:8]
-    _SESSIONS[session_id] = (issue, result)
+    _remember(session_id, issue, result)
 
     return {
         "success": True,
