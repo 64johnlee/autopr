@@ -125,6 +125,12 @@ def _print_instructions(public_url: str, token: str) -> None:
 
 
 def main() -> None:
+    # On Windows a redirected stdout defaults to cp1252 and raises UnicodeEncodeError
+    # on non-ASCII output (✓, …, box chars). Force UTF-8 so the script runs headless.
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
     token = _ensure_token()
     tunnel_tool = _pick_tunnel()
     if not tunnel_tool:
