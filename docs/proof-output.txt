@@ -1,0 +1,15 @@
+# AutoPR — live Qwen Cloud proof-of-deployment transcript
+# Generated against Alibaba Cloud Model Studio (dashscope-intl), free-tier key.
+
+--- qwen-max @ https://dashscope-intl.aliyuncs.com/compatible-mode/v1 ---
+response:   AutoPR triage on Alibaba Cloud
+model:      qwen-max
+request_id: chatcmpl-c1a81559-976d-9577-8860-64b85859b7c8
+usage:      CompletionUsage(completion_tokens=7, prompt_tokens=19, total_tokens=26, completion_tokens_details=None, prompt_tokens_details=PromptTokensDetails(audio_tokens=None, cached_tokens=0))
+
+--- qwen-plus @ https://dashscope-intl.aliyuncs.com/compatible-mode/v1 ---
+response:   AutoPR coder on Alibaba Cloud
+model:      qwen-plus
+request_id: chatcmpl-50fa5232-c9aa-933a-b497-476d598ddec2
+usage:      CompletionUsage(completion_tokens=6, prompt_tokens=18, total_tokens=24, completion_tokens_details=None, prompt_tokens_details=PromptTokensDetails(audio_tokens=None, cached_tokens=0))
+
